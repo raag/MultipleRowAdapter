@@ -1,0 +1,3 @@
+include ':MultipleRowAdapter'
+include ':app'
+rootProject.name = "MultipleRowAdapterTest"
