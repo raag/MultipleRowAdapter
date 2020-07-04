@@ -13,8 +13,6 @@ repositories {
 }
 ```
 
-build_root
-
 The next step is to add the library as dependency, open your build.gradle file in your app module as follows:
 
 ```kotlin
