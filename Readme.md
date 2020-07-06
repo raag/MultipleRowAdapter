@@ -7,9 +7,11 @@ Multiple row adapter is a library for android that allows you to add multiple ty
 The first step is to add jitpack as repository in your project, open your root build.gradle file and add the following line in repositories section:
 
 ```kotlin
-repositories {
-    ...
+allprojects {
+    repositories {
+        ...
 	maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
