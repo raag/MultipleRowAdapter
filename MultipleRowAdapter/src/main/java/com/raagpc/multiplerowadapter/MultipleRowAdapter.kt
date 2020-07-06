@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MultipleRowAdapter(
     private val recyclerView: RecyclerView,
-    private val dataSet: MutableList<MultipleRowInterface> = mutableListOf(),
+    private var dataSet: MutableList<MultipleRowInterface> = mutableListOf(),
     private val listener: RowAdapterListener? = null
 ): RecyclerView.Adapter<MultipleRowAdapter.MultipleRowViewHolder>() {
 
@@ -63,6 +63,13 @@ class MultipleRowAdapter(
     fun addRow(row: MultipleRowInterface) {
         rowTypes[row.type] = row
         dataSet.add(row)
+    }
+
+    fun updateRows(rows: MutableList<MultipleRowInterface>) {
+        this.dataSet = rows
+        dataSet.forEach {
+            rowTypes[it.type] = it
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
