@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.databinding.ViewDataBinding
 
 class MultipleRowAdapter(
     private val recyclerView: RecyclerView,
@@ -44,11 +45,18 @@ class MultipleRowAdapter(
         })
     }
 
-    class MultipleRowViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
-        fun bind(row: MultipleRowInterface) {
+    open class MultipleRowViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+        open fun bind(row: MultipleRowInterface) {
             row.bind(view)
         }
     }
+
+    class MultipleRowBindingViewHolder(private val mBinding: ViewDataBinding): MultipleRowViewHolder(mBinding.root) {
+        override fun bind(row: MultipleRowInterface) {
+            row.bind(mBinding)
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultipleRowViewHolder {
         return rowTypes[viewType]!!.createViewHolder(parent)
