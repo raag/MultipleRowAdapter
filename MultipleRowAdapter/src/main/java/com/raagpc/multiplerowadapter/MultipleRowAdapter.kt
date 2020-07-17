@@ -12,7 +12,7 @@ class MultipleRowAdapter(
     private val listener: RowAdapterListener? = null
 ): RecyclerView.Adapter<MultipleRowAdapter.MultipleRowViewHolder>() {
 
-    private val rowTypes = HashMap<Int, MultipleRowInterface>()
+    private var rowTypes = HashMap<Int, MultipleRowInterface>()
 
     interface RowAdapterListener {
         fun onScrollToBottom()
@@ -75,6 +75,7 @@ class MultipleRowAdapter(
 
     fun updateRows(rows: MutableList<MultipleRowInterface>) {
         this.dataSet = rows
+        rowTypes = HashMap<Int, MultipleRowInterface>()
         dataSet.forEach {
             rowTypes[it.type] = it
         }
