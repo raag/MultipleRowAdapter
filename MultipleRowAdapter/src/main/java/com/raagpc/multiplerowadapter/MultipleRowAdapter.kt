@@ -2,47 +2,19 @@ package com.raagpc.multiplerowadapter
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.databinding.ViewDataBinding
 
 class MultipleRowAdapter(
-    private val recyclerView: RecyclerView,
-    private var dataSet: MutableList<MultipleRowInterface> = mutableListOf(),
-    private val listener: RowAdapterListener? = null
+    private var dataSet: MutableList<MultipleRowInterface> = mutableListOf()
 ): RecyclerView.Adapter<MultipleRowAdapter.MultipleRowViewHolder>() {
 
     private var rowTypes = HashMap<Int, MultipleRowInterface>()
-
-    interface RowAdapterListener {
-        fun onScrollToBottom()
-    }
 
     init {
         dataSet.forEach {
             rowTypes[it.type] = it
         }
-        setupEvents()
-    }
-
-    private fun setupEvents( ) {
-        setupOnScrollToBottom()
-    }
-
-    private fun setupOnScrollToBottom(deltaRows: Int = 0) {
-        val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
-        recyclerView.addOnScrollListener( object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                linearLayoutManager?.let {
-                    val totalItemCount = it.itemCount
-                    val lastVisibleItem = it.findLastVisibleItemPosition()
-                    if (totalItemCount <= lastVisibleItem + deltaRows){
-                        listener?.onScrollToBottom()
-                    }
-                }
-            }
-        })
     }
 
     open class MultipleRowViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
@@ -71,14 +43,6 @@ class MultipleRowAdapter(
     fun addRow(row: MultipleRowInterface) {
         rowTypes[row.type] = row
         dataSet.add(row)
-    }
-
-    fun updateRows(rows: MutableList<MultipleRowInterface>) {
-        this.dataSet = rows
-        rowTypes = HashMap<Int, MultipleRowInterface>()
-        dataSet.forEach {
-            rowTypes[it.type] = it
-        }
     }
 
     override fun getItemViewType(position: Int): Int {

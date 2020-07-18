@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val rowType2 = 2
 
         list = findViewById(R.id.list)
-        val adapter = MultipleRowAdapter(list)
+        val adapter = MultipleRowAdapter()
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(this)
 
