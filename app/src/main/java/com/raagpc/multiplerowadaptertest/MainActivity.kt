@@ -2,30 +2,17 @@ package com.raagpc.multiplerowadaptertest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.raagpc.multiplerowadapter.MultipleRowAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.raagpc.multiplerowadaptertest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var list: RecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val rowType1 = 1
-        val rowType2 = 2
-
-        list = findViewById(R.id.list)
-        val adapter = MultipleRowAdapter()
-        list.adapter = adapter
-        list.layoutManager = LinearLayoutManager(this)
-
-        adapter.addRow( RowType1("test1", rowType1) )
-        adapter.addRow( RowType2("test2", rowType2) )
-        adapter.addRow( RowType2("test3", rowType2) )
-        adapter.addRow( RowType1("test4", rowType1) )
-        adapter.notifyDataSetChanged()
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        viewModel.initAdapter()
     }
 }
