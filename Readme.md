@@ -19,6 +19,6 @@ The next step is to add the library as dependency, open your build.gradle file i
 
 ```kotlin
 dependencies {
-    implementation 'com.github.raag:MultipleRowAdapter:0.5beta'
+    implementation 'com.github.raag:MultipleRowAdapter:0.5.6beta'
 }
 ```

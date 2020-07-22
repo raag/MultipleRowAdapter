@@ -45,6 +45,14 @@ class MultipleRowAdapter(
         dataSet.add(row)
     }
 
+    fun updateRows(rows: MutableList<MultipleRowInterface>) {
+        this.dataSet = rows
+        rowTypes = HashMap()
+        dataSet.forEach {
+            rowTypes[it.type] = it
+        }
+    }
+
     override fun getItemViewType(position: Int): Int {
         return dataSet[position].type
     }
